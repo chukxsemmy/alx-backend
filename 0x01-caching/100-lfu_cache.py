@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """LFU Caching 
 """
+from collections import OrderedDict
 
 from base_caching import BaseCaching
 
 
 class LFUCache(BaseCaching):
-    """Inherits from BaseCaching and is a caching system
+    """Represents an object that allows storing and
+    retrieving items from a dictionary with a LFU
+    removal mechanism when the limit is reached.
     """
     def __init__(self):
-        """Init cache.
+        """Initializes the cache.
         """
         super().__init__()
         self.cache_data = OrderedDict()
@@ -41,7 +44,7 @@ class LFUCache(BaseCaching):
         self.keys_freq.insert(ins_pos, [mru_key, mru_freq])
 
     def put(self, key, item):
-        """stores item in the cache.
+        """Adds an item in the cache.
         """
         if key is None or item is None:
             return
@@ -63,7 +66,7 @@ class LFUCache(BaseCaching):
             self.__reorder_items(key)
 
     def get(self, key):
-        """gets item by key.
+        """Retrieves an item by key.
         """
         if key is not None and key in self.cache_data:
             self.__reorder_items(key)
