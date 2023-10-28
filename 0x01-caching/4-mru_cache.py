@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-""" BaseCaching module
+"""MRU caching
 """
 from base_caching import BaseCaching
 
 
 class MRUCache(BaseCaching):
     """
-    FIFOCache defines a FIFO caching system
+    MRU caching
     """
 
     def __init__(self):
         """
-        Initialize the class with the parent's init method
+        Initializes the class
         """
         super().__init__()
         self.usage = []
@@ -35,7 +35,7 @@ class MRUCache(BaseCaching):
 
     def get(self, key):
         """
-        Return the value linked to a given key, or None
+        Returns value linked to a given key, or None
         """
         if key is not None and key in self.cache_data.keys():
             del self.usage[self.usage.index(key)]
